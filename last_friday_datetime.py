@@ -1,20 +1,13 @@
-from calendar import Calendar, FRIDAY
-import re
+import datetime
 
-def get_last_friday(string: str) -> str:
-    pattern = r"\W+"
-    string_reg = re.split(pattern, string)
-    dates = Calendar().monthdatescalendar(int(string_reg[1]), int(string_reg[0]))
-    # dates = Calendar().monthdatescalendar(2023, 6)
-    friday_list = []
-    for week in dates:
-        if week[FRIDAY].strftime("%m") == string_reg[0]:
-            friday_list.append(week[FRIDAY])
+from dateutil.relativedelta import FR, relativedelta
+ 
+def last_friday(d):
 
-    return str(friday_list[-1])
+    d = datetime.datetime.strptime("01/" + d, "%d/%m/%Y")
+    res = d+relativedelta(day=31, weekday=FR(-1))
+    return res.strftime("%d.%m.%Y")
 
-
-# print(get_last_friday('08/2022'))
-
+print(last_friday('05/2022'))
 
     
