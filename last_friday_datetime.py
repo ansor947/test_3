@@ -11,7 +11,7 @@ def get_last_friday(string: str) -> str:
         if week[FRIDAY].strftime("%m") == string_reg[0]:
             friday_list.append(week[FRIDAY])
 
-    return type(str(friday_list[-1]))
+    return str(friday_list[-1])
 
 
 # print(get_last_friday('08/2022'))
