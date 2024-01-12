@@ -1,13 +1,13 @@
-import datetime
+import calendar
 
-from dateutil.relativedelta import FR, relativedelta
- 
-def last_friday(d):
+def get_last_friday(string: str) -> str:
 
-    d = datetime.datetime.strptime("01/" + d, "%d/%m/%Y")
-    res = d+relativedelta(day=31, weekday=FR(-1))
-    return res.strftime("%d.%m.%Y")
-
-print(last_friday('05/2022'))
-
+    month, year = string.split("/")
+    last_day = calendar.monthrange(int(year), int(month))[1]
+    last_weekday = calendar.weekday(int(year), int(month), last_day)
+    last_friday = last_day - ((7 - (4 - last_weekday)) % 7)
     
+    return f"{last_friday}.{month}.{year}"
+
+
+# print(get_last_friday('01/2024'))
